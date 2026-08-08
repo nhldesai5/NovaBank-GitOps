@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: novabank-web
+  namespace: novabank
+  labels:
+    app: novabank-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: novabank-web
+  template:
+    metadata:
+      labels:
+        app: novabank-web
+    spec:
+      containers:
+      - name: novabank-web
+        image: nginx:1.27
+        ports:
+        - containerPort: 80
