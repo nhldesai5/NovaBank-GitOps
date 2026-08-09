@@ -1,0 +1,33 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-owner-label
+spec:
+  validationFailureAction: Enforce
+  background: true
+
+  rules:
+    - name: require-owner-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Deployment
+
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - argocd
+                - kyverno
+                - argo-rollouts
+                - monitoring
+
+      validate:
+        message: "All Deployments must have an owner label."
+
+        pattern:
+          metadata:
+            labels:
+              owner: "?*"
