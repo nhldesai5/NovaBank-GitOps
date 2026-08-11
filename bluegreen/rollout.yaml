@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: novabank-bluegreen
-        image: nginx:1.27
+        image: nginx:1.28
         ports:
         - containerPort: 80
 
