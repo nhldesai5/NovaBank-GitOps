@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: no-resources
+  labels:
+    owner: novabank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: no-resources
+  template:
+    metadata:
+      labels:
+        app: no-resources
+        owner: novabank
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

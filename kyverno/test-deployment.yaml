@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: test-app
   labels:
+    app: test-app
     owner: novabank
 spec:
   replicas: 1
@@ -13,7 +14,17 @@ spec:
     metadata:
       labels:
         app: test-app
+        owner: novabank
     spec:
       containers:
       - name: nginx
         image: nginx:1.27
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
