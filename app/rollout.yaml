@@ -6,6 +6,7 @@ metadata:
   labels:
     app: novabank-web
     owner: novabank
+
 spec:
   replicas: 2
 
@@ -19,29 +20,29 @@ spec:
         app: novabank-web
         owner: novabank
 
-   spec:
+    spec:
       containers:
-      - name: nginx
-        image: nginx:1.26
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-          limits:
-            cpu: "250m"
-            memory: "256Mi"
+        - name: nginx
+          image: nginx:1.26
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
 
   strategy:
     canary:
       steps:
-      - setWeight: 20
-      - pause:
-          duration: 30s
+        - setWeight: 20
+        - pause:
+            duration: 30s
 
-      - setWeight: 50
-      - pause:
-          duration: 30s
+        - setWeight: 50
+        - pause:
+            duration: 30s
 
-      - setWeight: 100
+        - setWeight: 100
